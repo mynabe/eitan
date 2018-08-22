@@ -40,14 +40,13 @@ class HomeController extends Controller
             {
                 $user = \Auth::user(); 
                 $query->select('vocabularies.id', 'vocabularies.japanese', 'vocabularies.english', 'vocabularies.part')
-                     ->from('details')
-                     ->whereRaw('vocabularies.id = details.vocabulary_id')
-                     ->leftJoin('results', 'results.id', '=', 'details.result_id')
-                     ->where('results.user_id', '=', $user->id)
-                     ->where('details.decision', '=', 1);
+                    ->from('details')
+                    ->whereRaw('vocabularies.id = details.vocabulary_id')
+                    ->leftJoin('results', 'results.id', '=', 'details.result_id')
+                    ->where('results.user_id', '=', $user->id)
+                    ->where('details.decision', '=', 1);
             })
             ->limit(10)->get();
-            
         }
         else
         { 

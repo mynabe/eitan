@@ -28,22 +28,22 @@ class ListController extends Controller
     	if(Input::get('detail'))
     	{
 	        $items = $detail->leftJoin('results', 'results.id', '=', 'details.result_id')
-	                 ->leftJoin('vocabularies', 'vocabularies.id', '=', 'details.vocabulary_id')
-                     ->where('results.user_id', '=', $user->id)
-                     ->where('user_id', $user->id)
-                     ->where('results.id', $request->detail)
-                     ->get();
+                            ->leftJoin('vocabularies', 'vocabularies.id', '=', 'details.vocabulary_id')
+                            ->where('results.user_id', '=', $user->id)
+                            ->where('user_id', $user->id)
+                            ->where('results.id', $request->detail)
+                            ->get();
 
 	        return view('detail', compact('items'));		
     	}
 
-    	// テスト実施orやり直すボタン押下
+        // テスト実施orやり直すボタン押下
     	if(Input::get('re_test') || Input::get('retry'))
     	{
     		return redirect("home");
     	}
 
-		// 保存するボタン押下
+        // 保存するボタン押下
         $user = \Auth::user();
         $result = new result;
         $result->user_id = $user->id;
@@ -79,9 +79,9 @@ class ListController extends Controller
         $detail-> insert($data);
 
         // 結果一覧を表示
-		$result_out = new result;
-    	$lists = $result_out->where('user_id', $user->id)->orderBy('created_at','desc')->paginate(10);
+        $result_out = new result;
+        $lists = $result_out->where('user_id', $user->id)->orderBy('created_at','desc')->paginate(10);
 
-   		return view('list', compact('lists'));
+        return view('list', compact('lists'));
     }
 }
