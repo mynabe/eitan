@@ -92,7 +92,7 @@ class ListController extends Controller
 
         if($total > 0)
         {
-            $rate = $correct / $total * 100;
+            $rate = floor($correct / $total * 100);
         }
 
         return $rate;
