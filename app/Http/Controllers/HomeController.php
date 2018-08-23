@@ -10,7 +10,6 @@ use App\detail;
 use App\vocabulary;
 
 
-
 class HomeController extends Controller
 {
     /**
@@ -83,6 +82,7 @@ class HomeController extends Controller
                 $items[$i]["decision"][$i] = false;
             }
         }
+        
         return view('display', compact('items'));
     }
 }

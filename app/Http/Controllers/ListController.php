@@ -12,7 +12,7 @@ class ListController extends Controller
 {
     public function index()
     {
-    	$user = \Auth::user();
+        $user = \Auth::user();
         $result_out = new result;
         $lists = $result_out->where('user_id', $user->id)->orderBy('created_at','desc')->paginate(10);
 
@@ -47,23 +47,7 @@ class ListController extends Controller
         $user = \Auth::user();
         $result = new result;
         $result->user_id = $user->id;
-
-        // 正解率を求める
-        $rate = 0;
-        $correct = 0;
-        $total = count($request["id"]);
-        for($i = 0; $i < $total; $i++)
-        {
-            if($request["decision"][$i])
-            {
-                $correct++; 
-            }
-        }
-        if($total > 0)
-        {
-        	$rate = $correct / $total * 100;
-        }    
-        $result->rate = $rate;
+        $result->rate = $this->calc_correct_rate($request);
         // 結果テーブルに保存  
         $result->save();
 
@@ -83,5 +67,34 @@ class ListController extends Controller
         $lists = $result_out->where('user_id', $user->id)->orderBy('created_at','desc')->paginate(10);
 
         return view('list', compact('lists'));
+    }
+
+
+    /**
+     * 正解率を求める
+     *
+     * @param array
+     * @return int
+     */
+    function calc_correct_rate($request)
+    {
+        $rate = 0;
+        $correct = 0;
+        $total = count($request["id"]);
+
+        for($i = 0; $i < $total; $i++)
+        {
+            if($request["decision"][$i])
+            {
+                $correct++; 
+            }
+        }
+
+        if($total > 0)
+        {
+            $rate = $correct / $total * 100;
+        }
+
+        return $rate;
     }
 }
