@@ -5,9 +5,27 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">
+                <?php  
+                    $display_grading = "";
+                    $display_reset = "";
+
+                    if(count($items) < 1)
+                    {
+                        $display_grading = "display:none";
+                    }
+                    else
+                    {
+                        $display_reset = "display:none";   
+                    }
+
+                ?>
+                <div class="card-header" style="{{$display_grading}}">
                     次の日本語に対応する、先頭文字のアルファベットから始まる英単語（1語）を入力後、<br>
                     ”採点する”ボタンを押してください。
+                </div>
+                <div class="card-header" style="{{$display_reset}}">
+                    全問正解しました！<br>
+                    ”リセット”ボタンを押すと最初の単語から出題されます。（履歴も消去されます）
                 </div>
 
                 <div class="card-body">
@@ -20,7 +38,9 @@
                         {{ csrf_field() }}
                        <table>
                             <tr><th></th><th></th><th></th><th style="text-align: center;">先頭文字</th><th></th></tr>
-                        <?php $no = 1; ?>
+                        <?php 
+                            $no = 1; 
+                        ?>
                         @foreach ($items as $item)
                             <tr height="40">
                                 <td><?php echo $no++; ?>.&nbsp;</td>
@@ -38,7 +58,8 @@
                         <br>
                         <div style="text-align: center;">
                             <button class="btn" type="submit" name="history" value="history" style="color: #FFFFFF; background-color: #fc9db8;">履歴を表示</button>
-                            <button class="btn btn-info" type="submit">採点する</button>
+                            <button class="btn btn-info" type="submit" name="grading" value="grading" style="{{$display_grading}}">採点する</button>
+                            <button class="btn btn-info" type="submit" name="reset" value="reset" style="{{$display_reset}}">リセット</button>
                         </div>
                     </form>
                 </div>

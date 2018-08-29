@@ -34,7 +34,8 @@ class HomeController extends Controller
 
         // 実行結果がある場合は、未実行または不正解の単語を表示する
         if($exist_results)
-        {            
+        {           
+
             $items = vocabulary::whereNotExists(function($query)
             {
                 $user = \Auth::user(); 
@@ -61,6 +62,16 @@ class HomeController extends Controller
         if(Input::get('history'))
         {
             return redirect("list");
+        }
+        // リセットボタン押下
+        if(Input::get('reset'))
+        {
+            // 実行情報を削除
+            $user = \Auth::user();
+            DB::table('results')->where('user_id', $user->id)->delete();
+            DB::table('details')->where('user_id', $user->id)->delete();
+
+            return redirect("home");
         }
 
         // 採点するボタン押下
