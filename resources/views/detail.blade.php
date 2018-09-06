@@ -13,16 +13,16 @@
                     @endif
                     <form action="/list" method="post" accept-charset="utf-8">
                         {{ csrf_field() }}
-                       <table>
-                            <tr><th></th><th width="200"></th><th width="80"></th><th width="200" style="text-align: center;">正解</th><th width="200" style="text-align: center;">回答</th><th width="80" style="text-align: center;">判定</th></tr>
-                        <?php $no = 1; ?>
-                        @foreach ($items as $item)
-                            <tr height="40">
-                                <td><?php echo $no++; ?>.&nbsp;</td>
-                                <td>{{$item->japanese}}</td>
-                                <td width="80" class="btn btn-warning btn-xm" style="pointer-events: none; color: #FFFFFF; background-color: #ffa500;">{{$item->part}}</td>
-                                <td style="text-align: center;">{{$item->english}}</td>
-                                <td style="text-align: center;">{{$item->input_value}}</td>
+                        <div class="container">
+                            <?php $no = 0; ?>
+                            @foreach ($items as $item)
+                            <?php $no++; ?>
+                            <div class="row">
+                                <div class="col-sm-1.9 col-xs-3 box" style="width:30px;"><?php echo $no; ?>.&nbsp;</div>
+                                <div class="col-sm-1.9 col-xs-3 box" style="width:200px;">{{$item->japanese}}</div>
+                                <div class="col-sm-1.9 col-xs-3 box" style="width:50px; text-align: center; color: #FFFFFF;"><p class="bg-warning">{{$item->part}}</p></div>
+                                <div class="col-sm-1.9 col-xs-3 box" style="text-align: center; width:140px;">{{$item->english}}</div>
+                                <div class="col-sm-1.9 col-xs-3 box" style="text-align: center; width:140px;">{{$item->input_value}}</div>
                                 <?php
                                     $decision ="";
                                     $f_color = "red";
@@ -35,10 +35,11 @@
                                     $decision = "×";
                                  } 
                                  ?>
-                                <td style="font-size:{{$f_size}}; color:{{$f_color}}; font-weight: bold; text-align: center;">{{$decision}}</td>
-                            </tr>
-                        @endforeach
-                        </table>
+                                 <div></div>
+                                <div class="col-sm-1.9 col-xs-3 box" style="width:50px; font-size:{{$f_size}}; color:{{$f_color}}; font-weight: bold; text-align: center;">{{$decision}}</div>
+                            </div>
+                            @endforeach
+                        </div>
                         <br>
                         <div style="text-align: center;">
                             <button class="btn btn-info" type="button" onclick="history.back()">閉じる</button>

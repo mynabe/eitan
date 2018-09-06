@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-use App\result;
-use App\detail;
-use App\vocabulary;
+use App\Result;
+use App\Detail;
+use App\Vocabulary;
 
 class ListController extends Controller
 {
