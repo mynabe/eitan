@@ -50,7 +50,7 @@
                             <input type="hidden" name="english[]" value="{{$item->english}}">
                             <input type="hidden" name="part[]" value="{{$item->part}}">
                             <input type="hidden" name="id[]" value="{{$item->id}}">
-                            <div class="col-sm-2.4 col-xs-4 box"> <input style="width:100%;" class="form-control" type="text/submit/hidden/button/etc" name="input_value[]" value=""></div>
+                            <div class="col-sm-2.4 col-xs-4 box"> <input style="width:100%;" class="form-control" type="text/submit/hidden/button/etc" name="input_value[]" value="" spellcheck="false"></div>
                         </div>
                         @endforeach
                     </div>
