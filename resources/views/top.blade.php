@@ -62,10 +62,23 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            #overImg{position: relative;}
+            #overImg a .top_small{width: 150px;}
+            #overImg a .top_large{display: none;}
+            #overImg a:hover .top_large {
+                display: block;
+                position: absolute;
+                width: 500px;
+                z-index:999;
+                left:50%;  
+                -webkit-transform: translate(-50%,-0%);
+                -moz-transform: translate(-50%,-0%);
+                transform: translate(-50%,-0%);   
+            }
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div class="position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -79,10 +92,19 @@
 
             <div class="content">
                 <div>
+                    <br><br>
                     英単語学習サイト
                 </div>
                 <div class="title m-b-md">
                     Eitango
+                </div>
+                <div id="overImg">
+                    <a><img class="top_small" src="{{ asset('/img/top1.png') }}"><img class="top_large" src="{{ asset('/img/top1.png') }}">
+                    </a>                  
+                    <a><img class="top_small" src="{{ asset('/img/top2.png') }}"><img class="top_large" src="{{ asset('/img/top2.png') }}">
+                    </a>
+                    <a><img class="top_small" src="{{ asset('/img/top3.png') }}"><img class="top_large" src="{{ asset('/img/top3.png') }}">
+                    </a>                                      
                 </div>
             </div>
         </div>
