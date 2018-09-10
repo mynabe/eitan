@@ -53,7 +53,7 @@
                 color: #636b6f;
                 padding: 0 25px;
                 font-size: 12px;
-                font-weight: 600;
+                font-weight: 500;
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
@@ -63,7 +63,7 @@
                 margin-bottom: 30px;
             }
             #overImg{position: relative;}
-            #overImg a .top_small{width: 150px;}
+            #overImg a .top_small{width: 120px;}
             #overImg a .top_large{display: none;}
             #overImg a:hover .top_large {
                 display: block;
@@ -74,6 +74,9 @@
                 -webkit-transform: translate(-50%,-0%);
                 -moz-transform: translate(-50%,-0%);
                 transform: translate(-50%,-0%);   
+            }
+            @media only screen and (max-width: 750px) {
+                img { max-width: 100%; }
             }
         </style>
     </head>
@@ -92,7 +95,7 @@
 
             <div class="content">
                 <div>
-                    <br><br>
+                    <br><br><br><br><br>
                     英単語学習サイト
                 </div>
                 <div class="title m-b-md">
