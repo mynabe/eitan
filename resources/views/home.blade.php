@@ -4,6 +4,11 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
             <div class="card">
                 <?php  
                     $display_grading = "";
@@ -28,11 +33,7 @@
                     ”リセット”ボタンを押すと最初の単語から出題されます。（履歴も消去されます）
                 </div>
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+
                     <form action="/home" method="post" accept-charset="utf-8">
                         {{ csrf_field() }}
                     <div  class="container">
