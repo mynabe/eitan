@@ -62,6 +62,7 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
             #overImg{position: relative;}
             #overImg a .top_small{width: 120px;}
             #overImg a .top_large{display: none;}
@@ -75,9 +76,10 @@
                 -moz-transform: translate(-50%,-0%);
                 transform: translate(-50%,-0%);   
             }
+
             @media only screen and (max-width: 750px) {
                 img { max-width: 100%; }
-            }
+            }          
         </style>
     </head>
     <body>

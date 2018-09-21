@@ -35,7 +35,6 @@ class HomeController extends Controller
         // 実行結果がある場合は、未実行または不正解の単語を表示する
         if($exist_results)
         {           
-
             $items = vocabulary::whereNotExists(function($query)
             {
                 $user = \Auth::user(); 
