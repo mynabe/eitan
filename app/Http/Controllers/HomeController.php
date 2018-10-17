@@ -33,10 +33,8 @@ class HomeController extends Controller
         $exist_results = DB::table('results')->where('user_id', $user->id)->exists();
 
         // 実行結果がある場合は、未実行または不正解の単語を表示する
-        if($exist_results)
-        {           
-            $items = vocabulary::whereNotExists(function($query)
-            {
+        if ($exist_results) {           
+            $items = vocabulary::whereNotExists(function($query) {
                 $user = \Auth::user(); 
                 $query->select('vocabularies.id', 'vocabularies.japanese', 'vocabularies.english', 'vocabularies.part')
                     ->from('details')
@@ -46,53 +44,43 @@ class HomeController extends Controller
                     ->where('details.decision', '=', 1);
             })
             ->limit(10)->get();
-        }
-        else
-        { 
+        } else { 
             $items =  DB::table('vocabularies')->limit(10)->get();
         }
-
         return view('home', compact('items'));
     }
 
     public function post(Request $request)
     {
         // 履歴を表示ボタン押下
-        if(Input::get('history'))
-        {
+        if (Input::get('history')) {
             return redirect("list");
         }
         // リセットボタン押下
-        if(Input::get('reset'))
-        {
+        if (Input::get('reset')) {
             // 実行情報を削除
             $user = \Auth::user();
             DB::table('results')->where('user_id', $user->id)->delete();
             DB::table('details')->where('user_id', $user->id)->delete();
-
+            
             return redirect("home");
         }
 
         // 採点するボタン押下
         $items = array();
-        for($i = 0; $i < count($request["japanese"]); $i++) 
-        {
+        for ($i = 0; $i < count($request["japanese"]); $i++) {
             $items[$i]["japanese"][$i] = $request["japanese"][$i];
             $items[$i]["english"][$i] = $request["english"][$i];
             $items[$i]["part"][$i] = $request["part"][$i];
             $items[$i]["input_value"][$i] = $request["input_value"][$i];
             $items[$i]["id"][$i] = $request["id"][$i];
 
-            if($request["english"][$i] == $request["input_value"][$i])
-            {
+            if ($request["english"][$i] == $request["input_value"][$i]) {
                 $items[$i]["decision"][$i] = true;
-            }
-            else
-            {
+            } else {
                 $items[$i]["decision"][$i] = false;
             }
-        }
-        
+        }       
         return view('display', compact('items'));
     }
 }

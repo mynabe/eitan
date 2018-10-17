@@ -35,8 +35,7 @@ class ListController extends Controller
     	$detail = new detail;
 
         // 詳細ボタン押下
-    	if(Input::get('detail'))
-    	{
+    	if (Input::get('detail')) {
 	        $items = $detail->leftJoin('results', 'results.id', '=', 'details.result_id')
                             ->leftJoin('vocabularies', 'vocabularies.id', '=', 'details.vocabulary_id')
                             ->where('results.user_id', '=', $user->id)
@@ -47,8 +46,7 @@ class ListController extends Controller
     	}
 
         // テスト実施orやり直すボタン押下
-    	if(Input::get('re_test') || Input::get('retry'))
-    	{
+    	if (Input::get('re_test') || Input::get('retry')) {
     		return redirect("home");
     	}
 
@@ -61,8 +59,7 @@ class ListController extends Controller
         $result->save();
 
         $data = array();
-        for($i = 0; $i < count($request["id"]); $i++) 
-        {
+        for ($i = 0; $i < count($request["id"]); $i++) {
             $data[$i]["result_id"] = $result->id;
             $data[$i]["vocabulary_id"] = $request["id"][$i];
             $data[$i]["input_value"] = $request["input_value"][$i] ? $request["input_value"][$i] : "" ;
@@ -92,19 +89,16 @@ class ListController extends Controller
         $correct = 0;
         $total = count($request["id"]);
 
-        for($i = 0; $i < $total; $i++)
-        {
-            if($request["decision"][$i])
-            {
+        for ($i = 0; $i < $total; $i++) {
+            if ($request["decision"][$i]) {
                 $correct++; 
             }
         }
 
-        if($total > 0)
-        {
+        if ($total > 0) {
             $rate = floor($correct / $total * 100);
         }
-
+        
         return $rate;
     }
 }
