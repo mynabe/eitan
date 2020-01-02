@@ -47,11 +47,12 @@ class HomeController extends Controller
         } else { 
             $items =  DB::table('vocabularies')->limit(10)->get();
         }
-        return view('home', compact('items'));
+        return view('home')->with('items', $items);
     }
 
     public function post(Request $request)
     {
+
         // 履歴を表示ボタン押下
         if (Input::get('history')) {
             return redirect("list");
@@ -81,6 +82,6 @@ class HomeController extends Controller
                 $items[$i]["decision"][$i] = false;
             }
         }       
-        return view('display', compact('items'));
+        return view('display')->with('items', $items);
     }
 }

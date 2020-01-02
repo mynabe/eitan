@@ -26,7 +26,7 @@ class ListController extends Controller
         $result_out = new result;
         $lists = $result_out->where('user_id', $user->id)->orderBy('created_at','desc')->paginate(10);
 
-        return view('list', compact('lists'));
+        return view('list')->with('lists', $lists);
     }
 
     public function post(Request $request)
@@ -42,7 +42,7 @@ class ListController extends Controller
                             ->where('results.id', $request->detail)
                             ->get();
 
-	        return view('detail', compact('items'));		
+	        return view('detail')->with('items', $items);		
     	}
 
         // テスト実施orやり直すボタン押下
@@ -73,7 +73,7 @@ class ListController extends Controller
         $result_out = new result;
         $lists = $result_out->where('user_id', $user->id)->orderBy('created_at','desc')->paginate(10);
 
-        return view('list', compact('lists'));
+        return view('list')->with('lists', $lists);
     }
 
 
